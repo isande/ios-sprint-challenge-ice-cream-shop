@@ -42,12 +42,24 @@ class IceCreamShop {
     }
     
     func listTopFlavors() {
-        print("Our top flavors are:")
+        var topFlavors = [String]()
         for flavor in flavors {
             if flavor.rating > 4 {
-                print("\(flavor.name)")
+                topFlavors.append(flavor.name)
             }
         }
+        var topFlavorCount = topFlavors.count
+        if topFlavorCount == 0 {
+            print("We don't have any top flavors yet.")
+            return
+        }
+        print("Our top flavors are", terminator: " ")
+        while topFlavorCount > 1 {
+            print("\(topFlavors[0]),", terminator: " ")
+            topFlavors.removeFirst()
+            topFlavorCount = topFlavors.count
+        }
+        print("and \(topFlavors[0]).")
     }
     
     func orderCone(flavor: Flavor, topping: Topping?, size: Size) -> Cone? {
@@ -87,11 +99,6 @@ let myCone = myShop.orderCone(flavor: chocolate, topping: nil, size: Size.medium
 myCone?.eat()
 
 print(myShop.totalSales)
-
-
-
-
-
 
 
 
